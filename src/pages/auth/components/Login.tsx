@@ -77,19 +77,6 @@ export function Login() {
             Sign in
           </h3>
         </div>
-        <div className="grid grid-cols-1 gap-2.5">
-          <a className="btn btn-light btn-sm justify-center" href="#">
-            <img
-              alt=""
-              className="size-3.5 shrink-0"
-              src="/media/brand-logos/google.svg"
-            />
-            Use Google
-          </a>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="border-t border-gray-200 w-full"> </span>
-        </div>
         <div className="flex flex-col gap-1">
           <label className="form-label text-gray-900"> Email </label>
           <input
