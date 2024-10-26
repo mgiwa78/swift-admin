@@ -4,14 +4,18 @@ import * as Yup from "yup";
 import clsx from "clsx";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setCredentials,
   removeCredentials,
   setToken,
 } from "../../../redux/slice/authSlice";
-import { useLoginMutation } from "../../../redux/services/auth";
+import {
+  useGetProfileQuery,
+  useLoginMutation,
+} from "../../../redux/services/auth";
 import { post } from "../../../lib/methods";
+import { selectUserToken } from "../../../redux/selectors/auth";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -33,6 +37,11 @@ const initialValues = {
 export function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const token = useSelector(selectUserToken);
+
+  const { data: profileApiResponse, ...profileApiResponseDetails } =
+    useGetProfileQuery(null, { skip: !!token });
+
   const [login, loginApiDetails] = useLoginMutation();
   const formik = useFormik({
     initialValues,
@@ -45,7 +54,9 @@ export function Login() {
           email: values.email.toLowerCase(),
           password: values.password,
         });
+
         dispatch(setToken(response.token));
+        await profileApiResponseDetails.refetch();
         navigate("/dashboard");
       } catch (error: any) {
         console.log(error);

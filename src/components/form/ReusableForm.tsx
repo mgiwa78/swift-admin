@@ -217,23 +217,24 @@ const ReusableForm: React.FC<ReusableFormProps> = ({
               isMulti={attribute.multiple}
               options={attribute.options || []}
               value={
-                attribute.options
-                  ? attribute.multiple
-                    ? attribute.options?.filter((op: any) => {
-                        return (
-                          formik.values[attribute.name].includes(op.id) || {
-                            label: "",
-                            value: "",
-                          }
-                        );
-                      })
-                    : attribute.options?.find(
-                        (op) => op.value === formik.values[attribute.name]
-                      ) || {
-                        label: "",
-                        value: "",
-                      }
-                  : {
+                attribute.multiple
+                  ? attribute.options?.filter((op: any) => {
+                      console.log(
+                        formik.values[attribute.name].includes(op.id) || {
+                          label: "",
+                          value: "",
+                        }
+                      );
+                      return (
+                        formik.values[attribute.name].includes(op.id) || {
+                          label: "",
+                          value: "",
+                        }
+                      );
+                    })
+                  : attribute.options?.find(
+                      (op) => op.value === formik.values[attribute.name]
+                    ) || {
                       label: "",
                       value: "",
                     }
