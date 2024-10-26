@@ -69,7 +69,7 @@ export function SetNewPassword() {
         });
         setSubmitting(false);
         setLoading(false);
-      } catch (error) {
+      } catch (error: any) {
         console.error(error);
         setStatus("The NewPassword details is incorrect");
         setSubmitting(false);

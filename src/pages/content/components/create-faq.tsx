@@ -34,10 +34,12 @@ const CreateFaq = ({}: Props) => {
           label: "Select answer",
           value: "",
         },
-        ...faqsCategoriesApiResponse?.data?.map((faqsCategoriesRes) => ({
-          label: faqsCategoriesRes.title,
-          value: Number(faqsCategoriesRes.id),
-        })),
+        ...(faqsCategoriesApiResponse?.data
+          ? faqsCategoriesApiResponse?.data?.map((faqsCategoriesRes) => ({
+              label: faqsCategoriesRes.title,
+              value: Number(faqsCategoriesRes.id),
+            }))
+          : []),
       ],
       validation: Yup.string().required("Faq category is required"),
     },
@@ -69,7 +71,7 @@ const CreateFaq = ({}: Props) => {
       if (res.id) {
         toast("Faq Created");
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
   };

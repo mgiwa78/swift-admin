@@ -86,10 +86,8 @@ const ErrandRequestDetails = ({ errandRequest, onClose }: Props) => {
   return (
     <>
       <ReusableDetailsComponent
-        isLoading={errandRequestApiResponseDetails.isLoading}
         data={handleErrandsRequestApiResponse(errandRequestApiResponse)}
         title="View Errand"
-        actions={ViewErrandRequestActions}
         onClose={() => onClose()}
       />
     </>

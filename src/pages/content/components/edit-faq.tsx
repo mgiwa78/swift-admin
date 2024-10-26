@@ -23,8 +23,9 @@ const EditFaq = ({}: Props) => {
     ...faqsCategoriesApiResponseDetails
   } = useGetFaqCategoriesQuery({});
 
-  const { data: FaqApiResponse, ...errandApiResponseDetails } =
-    useGetFaqQuery(id);
+  const { data: FaqApiResponse, ...errandApiResponseDetails } = useGetFaqQuery(
+    id || ""
+  );
 
   if (faqsCategoriesApiResponseDetails.isLoading) {
     return <LoadingSpinner />;
@@ -41,10 +42,12 @@ const EditFaq = ({}: Props) => {
           label: "Select answer",
           value: "",
         },
-        ...faqsCategoriesApiResponse?.data?.map((faqsCategoriesRes) => ({
-          label: faqsCategoriesRes.title,
-          value: Number(faqsCategoriesRes.id),
-        })),
+        ...(faqsCategoriesApiResponse?.data
+          ? faqsCategoriesApiResponse?.data?.map((faqsCategoriesRes) => ({
+              label: faqsCategoriesRes.title,
+              value: Number(faqsCategoriesRes.id),
+            }))
+          : []),
       ],
       validation: Yup.string().required("Faq category is required"),
     },
@@ -71,13 +74,13 @@ const EditFaq = ({}: Props) => {
   };
   const handleSubmit = async (values: any) => {
     try {
-      const res: any = await updateFaq({ id, data: values }).unwrap();
+      const res: any = await updateFaq({ id: id || "", data: values }).unwrap();
 
       if (res.id) {
         toast("Faq Updated successfully");
         navigate("/content/faqs");
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
   };

@@ -49,7 +49,7 @@ const ErrandOverview = (props: Props) => {
       } else {
         toast.error("Error processing payment");
       }
-    } catch (error) {
+    } catch (error: any) {
     } finally {
       dispatch(suspenseHide());
     }

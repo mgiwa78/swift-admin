@@ -14,7 +14,7 @@ const ViewAdmin = (props: Props) => {
     data: adminApiResponse,
     refetch: refetchAdminApiResponse,
     isFetching,
-  } = useGetAdminQuery(adminId);
+  } = useGetAdminQuery(adminId || "");
   return (
     <main className="grow content pt-5" id="content" role="content">
       <div className="container-fixed" id="content_container"></div>
@@ -28,7 +28,7 @@ const ViewAdmin = (props: Props) => {
             />
             <div className="flex items-center gap-1.5">
               <div className="text-lg leading-5 font-semibold text-gray-900">
-                {adminApiResponse?.firstName + " " + adminApiResponse?.lastName}
+                {adminApiResponse?.fullName}
               </div>
               <svg
                 className="text-primary"

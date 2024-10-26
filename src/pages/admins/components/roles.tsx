@@ -6,7 +6,7 @@ import {
   useDeleteRoleMutation,
   useGetRolesQuery,
 } from "../../../redux/services/role";
-import IRole from "../../../types/Role";
+import IRole from "../../../types/role";
 import useAlert from "../../../utils/use-alert";
 
 export function AllRoles() {

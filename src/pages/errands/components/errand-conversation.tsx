@@ -38,7 +38,7 @@ export function ErrandConversation() {
       });
       setSelectedFiles([]);
       formik.resetForm();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error submitting ticket response", error);
     }
   };

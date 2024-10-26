@@ -1,4 +1,4 @@
-import IRole from "../../types/Role";
+import IRole from "../../types/role";
 import { PaginatedResponse } from "../../types/statics";
 import { api, providesList } from "./api";
 

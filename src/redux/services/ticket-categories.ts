@@ -1,11 +1,11 @@
-import ITicketCategories from "../../types/ticket-categories";
+import ITicketCategory from "../../types/ticket-categories";
 import { PaginatedResponse } from "../../types/statics";
 import { api, providesList } from "./api";
 
 export const TicketCategoriesApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getTicketCategoriess: builder.query<
-      PaginatedResponse<ITicketCategories[]>,
+      PaginatedResponse<ITicketCategory[]>,
       any
     >({
       query: (params) => ({
@@ -14,7 +14,7 @@ export const TicketCategoriesApi = api.injectEndpoints({
       }),
       providesTags: (result) => providesList(result, "TicketCategories"),
     }),
-    getTicketCategories: builder.query<ITicketCategories, string>({
+    getTicketCategories: builder.query<ITicketCategory, string>({
       query: (id) => `ticket-categories/${id}`,
       providesTags: (result, error, id) => [{ type: "TicketCategories", id }],
     }),
@@ -30,8 +30,8 @@ export const TicketCategoriesApi = api.injectEndpoints({
       invalidatesTags: [{ type: "TicketCategories", id: "LIST" }],
     }),
     updateTicketCategories: builder.mutation<
-      ITicketCategories,
-      { id: string; data: Partial<ITicketCategories> }
+      ITicketCategory,
+      { id: string; data: Partial<ITicketCategory> }
     >({
       query: ({ id, data }) => ({
         url: `ticket-categories/${id}`,

@@ -45,7 +45,7 @@ const CreateFaqCategory = () => {
       }).unwrap();
       navigate("/content/faqs/categories");
       toast("Faq Category Created");
-    } catch (error) {
+    } catch (error: any) {
       toast.error("Failed to update errand. Please try again.");
     }
   };

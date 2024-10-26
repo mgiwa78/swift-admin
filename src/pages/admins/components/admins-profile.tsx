@@ -18,7 +18,7 @@ const AdminProfile = (props: Props) => {
   const [updateAdmin, { ...updateAdminApiDetails }] = useUpdateAdminMutation();
 
   const { data: adminApiResponse, ...adminApiResponseDetails } =
-    useGetAdminQuery(adminId);
+    useGetAdminQuery(adminId || "");
 
   if (adminApiResponseDetails.isLoading) {
     return <LoadingSpinner />;
@@ -34,13 +34,7 @@ const AdminProfile = (props: Props) => {
         .email("Invalid email format")
         .required("Email is required"),
     },
-    {
-      name: "firstName",
-      label: "First Name",
-      type: "text",
-      placeholder: "Enter First Name",
-      validation: Yup.string().required("First Name is required"),
-    },
+
     {
       name: "status",
       label: "Status",
@@ -57,11 +51,11 @@ const AdminProfile = (props: Props) => {
       validation: Yup.string().required("Status is required"),
     },
     {
-      name: "lastName",
-      label: "Last Name",
+      name: "fullName",
+      label: "FullName",
       type: "text",
-      placeholder: "Enter Last Name",
-      validation: Yup.string().required("Last Name is required"),
+      placeholder: "Enter fullName",
+      validation: Yup.string().required("fullName is required"),
     },
     {
       name: "contactNumber",
@@ -73,17 +67,16 @@ const AdminProfile = (props: Props) => {
   ];
 
   const initialValues = {
-    email: adminApiResponse.email,
-    lastName: adminApiResponse.lastName,
-    contactNumber: adminApiResponse.contactNumber,
-    status: adminApiResponse.status,
-    firstName: adminApiResponse.firstName,
+    email: adminApiResponse?.email,
+    contactNumber: adminApiResponse?.contactNumber,
+    status: adminApiResponse?.status,
+    fullName: adminApiResponse?.fullName,
   };
 
   const handleSubmit = async (values: any) => {
     try {
       const res: any = await updateAdmin({
-        id: adminId,
+        id: adminId || "",
         data: {
           ...values,
           contactNumber: `${values.contactNumber}`,
@@ -93,7 +86,7 @@ const AdminProfile = (props: Props) => {
       if (res.id) {
         toast("Admin Updated!");
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
   };
@@ -117,7 +110,7 @@ const AdminProfile = (props: Props) => {
                     Address:
                   </td>
                   <td className="text-sm font-medium text-gray-800 pb-3.5">
-                    {adminApiResponse.address}
+                    {adminApiResponse?.address}
                   </td>
                 </tr>
 

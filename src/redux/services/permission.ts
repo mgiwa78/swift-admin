@@ -1,5 +1,4 @@
 import IPermission from "../../types/permission";
-import IPermission from "../../types/permission";
 import { PaginatedResponse } from "../../types/statics";
 import { api, providesList } from "./api";
 

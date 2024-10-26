@@ -25,7 +25,7 @@ const EditFaqCategory = () => {
     useUpdateFaqCategoryMutation();
 
   const { data: FaqCategoryApiResponse, ...errandApiCategoryResponseDetails } =
-    useGetFaqCategoryQuery(id);
+    useGetFaqCategoryQuery(id || "");
 
   if (errandApiCategoryResponseDetails.isFetching) {
     return <LoadingSplash />;
@@ -41,18 +41,18 @@ const EditFaqCategory = () => {
   ];
 
   const initialValues = {
-    title: FaqCategoryApiResponse.title,
+    title: FaqCategoryApiResponse?.title,
   };
 
   const handleSubmit = async (values: any) => {
     try {
       await updateFaqCategory({
-        id,
+        id: id || "",
         data: values,
       }).unwrap();
       navigate("/content/faqs/categories");
       toast("Faq Category Updated");
-    } catch (error) {
+    } catch (error: any) {
       toast.error("Failed to update errand. Please try again.");
     }
   };
@@ -91,7 +91,7 @@ const EditFaqCategory = () => {
             onSubmit={handleSubmit}
             handleCancel={handleCancel}
             title="Update Faq Category"
-            isLoading={updateFaqCategoryApiResponse.isLoading}
+            isLoading={updateFaqCategoryApiResponse?.isLoading}
           />
         </div>
       </div>

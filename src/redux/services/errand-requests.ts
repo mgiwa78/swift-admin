@@ -22,7 +22,7 @@ export const errandsRequestsApi = api.injectEndpoints({
         url: `errand-requests`,
         params,
       }),
-      providesTags: (result, error, { errand }) => {
+      providesTags: (result, error, { errand }): any => {
         const tags = result?.data
           ? result.data.map(({ id }) => ({
               type: "ErrandRequest",
@@ -33,7 +33,6 @@ export const errandsRequestsApi = api.injectEndpoints({
         // Always provide the errand tag
         tags.push({ type: "ErrandRequest", id: `ERRAND-REQUESTS-${errand}` });
 
-        console.log(tags);
         return tags;
       },
     }),
@@ -49,10 +48,7 @@ export const errandsRequestsApi = api.injectEndpoints({
       }),
       invalidatesTags: [{ type: "ErrandRequest" }],
     }),
-    updateErrandErrandRequestStatus: builder.mutation<
-      { success: boolean },
-      Partial<any>
-    >({
+    updateErrandErrandRequestStatus: builder.mutation<any, Partial<any>>({
       query: ({ id, data }) => ({
         url: `errand-requests/${id}/update-status`,
         method: "PUT",
@@ -61,7 +57,7 @@ export const errandsRequestsApi = api.injectEndpoints({
       invalidatesTags: (result, error, { id }) => [
         { type: "ErrandRequest", id },
         { type: "Errand" },
-        { type: "ErrandRequest", id: `ERRAND-REQUESTS-${result.errand?.id}` },
+        { type: "ErrandRequest", id: `ERRAND-REQUESTS-${result?.errand?.id}` },
       ],
     }),
     updateErrandRequest: builder.mutation<

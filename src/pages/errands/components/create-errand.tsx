@@ -192,7 +192,7 @@ const CreateErrand = () => {
         toast.success("Errand created successfully!");
         navigate("/errands");
       }
-    } catch (error) {
+    } catch (error: any) {
       toast.error("Failed to create errand. Please try again.");
     } finally {
       setLoading(false);

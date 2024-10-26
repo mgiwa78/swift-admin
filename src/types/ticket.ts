@@ -1,4 +1,5 @@
-import IUser from "./user";
+import { IAdmin } from "./admin";
+import { ICustomer } from "./customers";
 import ITicketCategory from "./ticket-categories";
 
 export default interface ITicket {
@@ -7,7 +8,7 @@ export default interface ITicket {
   status: string;
   subject: string;
   createdAt: string;
-  author: IUser;
-  assignedTo: IUser;
+  author: ICustomer;
+  assignedTo: IAdmin;
   id: string;
 }

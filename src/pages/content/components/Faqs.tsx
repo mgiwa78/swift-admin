@@ -122,13 +122,13 @@ export function Faqs() {
       <div className="container-fixed">
         <div className="grid gap-5 lg:gap-7.5">
           <ReusableTable
-            data={handleFaqApiResponse(faqApiResponse?.data)}
+            data={handleFaqApiResponse(faqApiResponse?.data || [])}
             dataImage={false}
             deleteAction={handleDeleteErrand}
             columns={columns}
             isLoading={faqApiResponseDetails?.isFetching}
             error={null}
-            totalItems={faqApiResponse?.total}
+            totalItems={faqApiResponse?.total || 0}
             tableFilters={tableFilters}
             sort={{
               sortState: filterParams.sort,

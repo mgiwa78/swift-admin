@@ -225,16 +225,35 @@ const ReusableFormModal: React.FC<ReusableFormModalProps> = ({
               label={attribute.label}
               isMulti={attribute.multiple}
               options={attribute.options || []}
-              value={attribute.options?.find(
-                (op) => op.value === formik.values[attribute.name]
-              )}
+              value={
+                attribute.options
+                  ? attribute.multiple
+                    ? attribute.options?.filter((op: any) => {
+                        return (
+                          formik.values[attribute.name].includes(op.id) || {
+                            label: "",
+                            value: "",
+                          }
+                        );
+                      })
+                    : attribute.options?.find(
+                        (op) => op.value === formik.values[attribute.name]
+                      ) || {
+                        label: "",
+                        value: "",
+                      }
+                  : {
+                      label: "",
+                      value: "",
+                    }
+              }
               onChange={(option: any) => {
                 attribute.multiple
                   ? formik.setFieldValue(
                       attribute.name,
-                      option.map((o: any) => o.id)
+                      option.map((o: any) => o.value)
                     )
-                  : formik.setFieldValue(attribute.name, option.id);
+                  : formik.setFieldValue(attribute.name, option.value);
               }}
             />
             {formik.errors[attribute.name] && (

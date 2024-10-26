@@ -51,7 +51,7 @@ const CreateCategory = () => {
         toast.success("Category created successfully!");
         navigate("/errands/categories");
       }
-    } catch (error) {
+    } catch (error: any) {
       toast.error("Failed to create errand. Please try again.");
     } finally {
       setLoading(false);

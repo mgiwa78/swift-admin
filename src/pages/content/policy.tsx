@@ -30,7 +30,7 @@ const PolicyContent = ({}: Props) => {
       if (res.id) {
         toast("Faq Created");
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
   };

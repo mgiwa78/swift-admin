@@ -53,7 +53,7 @@ const ResetPassword = () => {
         toast.success("Password reset successfully!");
         navigate("/settings");
       }
-    } catch (error) {
+    } catch (error: any) {
       toast.error("Failed to reset password. Please try again.");
     } finally {
       setLoading(false);

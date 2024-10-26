@@ -1,4 +1,4 @@
-import IActivityLogLog from "../../types/activity";
+import { IActivityLog } from "../../types/activity";
 import { PaginatedResponse } from "../../types/statics";
 import { api, providesList } from "./api";
 
@@ -47,10 +47,4 @@ export const activityLogsApi = api.injectEndpoints({
   }),
 });
 
-export const {
-  useGetActivityLogsQuery,
-  useGetActivityQuery,
-  useCreateActivityMutation,
-  useUpdateActivityMutation,
-  useDeleteActivityMutation,
-} = activityLogsApi;
+export const { useGetActivityLogsQuery } = activityLogsApi;

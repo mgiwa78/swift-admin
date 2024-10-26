@@ -21,7 +21,7 @@ export const AuthApi = api.injectEndpoints({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled; // Wait for the query to fulfill
-        } catch (error) {
+        } catch (error: any) {
           console.error("Failed to fetch user profile:", error);
         }
       },

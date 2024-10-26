@@ -129,7 +129,7 @@ const EditErrand = () => {
 
       toast("Errand Updated");
       navigate("/errands/categories");
-    } catch (error) {
+    } catch (error: any) {
       toast.error("Failed to update errand. Please try again.");
     }
   };

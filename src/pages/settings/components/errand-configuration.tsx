@@ -44,7 +44,7 @@ const ErrandConfiguration = () => {
       if (res.id) {
         toast.success("Config updated successfully!");
       }
-    } catch (error) {
+    } catch (error: any) {
       toast.error("Failed to update config. Please try again.");
     } finally {
       setLoading(false);

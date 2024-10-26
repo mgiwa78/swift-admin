@@ -114,14 +114,14 @@ export function FaqCategories() {
           <div className="grid gap-5 lg:gap-7.5">
             <ReusableTable
               data={handleErrandCategoriesApiResponse(
-                faqCategoryApiResponse?.data
+                faqCategoryApiResponse?.data || []
               )}
               dataImage={false}
               deleteAction={handleDeleteErrand}
               columns={columns}
               isLoading={faqCategoryApiResponseDetails?.isFetching}
               error={null}
-              totalItems={faqCategoryApiResponse?.total}
+              totalItems={faqCategoryApiResponse?.total || 0}
               tableFilters={tableFilters}
               sort={{
                 sortState: filterParams.sort,

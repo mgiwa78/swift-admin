@@ -38,7 +38,7 @@ const CreateRole = () => {
       await createRole(values).unwrap();
       navigate("/admins/roles");
       toast("Role Created");
-    } catch (error) {
+    } catch (error: any) {
       toast.error("Failed to update errand. Please try again.");
     }
   };

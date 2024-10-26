@@ -50,7 +50,7 @@ export function Registration() {
     onSubmit: async (values, { setStatus, setSubmitting }) => {
       setLoading(true);
       try {
-      } catch (error) {
+      } catch (error: any) {
         console.error(error);
         setStatus("The registration details is incorrect");
         setSubmitting(false);

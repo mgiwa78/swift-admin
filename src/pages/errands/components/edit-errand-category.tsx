@@ -49,12 +49,12 @@ const EditErrandCategory = () => {
   const handleSubmit = async (values: any) => {
     try {
       await updateErrandCategory({
-        id,
+        id: id || "",
         data: values,
       }).unwrap();
       navigate("/errands/categories");
       toast("Errand Category Updated");
-    } catch (error) {
+    } catch (error: any) {
       toast.error("Failed to update errand. Please try again.");
     }
   };
