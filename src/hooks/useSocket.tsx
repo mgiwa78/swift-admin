@@ -4,12 +4,15 @@ import React, { createContext, useContext, ReactNode } from "react";
 import { SOCKET_API_BASE_URL } from "../constants/api";
 
 import { useGetProfileQuery } from "../redux/services/auth";
+import { selectUserToken } from "../redux/selectors/auth";
+import { useSelector } from "react-redux";
 
 export const useSocket = (): any => {
   const [isConnected, setIsConnected] = useState(false);
   const socketRef = useRef<any>(null);
-
+  const token = useSelector(selectUserToken);
   useEffect(() => {
+    if (!token) return;
     const socket = io(SOCKET_API_BASE_URL);
 
     socket.on("connect", () => {
@@ -27,7 +30,7 @@ export const useSocket = (): any => {
     });
 
     socketRef.current = socket;
-  }, []);
+  }, [token]);
 
   const emit = (eventName: any, data: any) => {
     if (socketRef.current) {
