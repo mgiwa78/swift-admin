@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useGetDashboardQuery } from "../../redux/services/dashboard";
-import LoadingSplash from "../../components/common/loading-splash";
 import Chart from "react-apexcharts";
 import { formatCamelCaseToTitleCase } from "../../utils/assetHelper";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
@@ -126,12 +124,14 @@ export const DynamicDashboard = () => {
         return (
           <div className="col-span-6">
             <div key={key} className="stat-chart  capitalize">
-              <Chart
-                options={barChartOptions}
-                series={barChartOptions.series}
-                type="bar"
-                height={350}
-              />
+              {barChartOptions.series && (
+                <Chart
+                  options={barChartOptions}
+                  series={barChartOptions.series}
+                  type="bar"
+                  height={350}
+                />
+              )}
             </div>
           </div>
         );
@@ -151,12 +151,14 @@ export const DynamicDashboard = () => {
         return (
           <div className="col-span-6">
             <div key={key} className="stat-chart  capitalize">
-              <Chart
-                options={PiechartOptions}
-                series={PiechartOptions.series}
-                type="pie"
-                height={350}
-              />
+              {PiechartOptions.series && (
+                <Chart
+                  options={PiechartOptions}
+                  series={PiechartOptions.series}
+                  type="pie"
+                  height={350}
+                />
+              )}
             </div>
           </div>
         );
